@@ -17,7 +17,8 @@ body {
 }
 .main-container {
   margin-block: 32px;
-  width: 343px;
+  margin-inline: 16px;
+  width: 100%;
   background-color: hsl(0, 0%, 100%);
   border-radius: 16px;
   padding: 24px;
@@ -32,7 +33,7 @@ legend {
 }
 input[type="text"],
 input[type="email"],
-fieldset label {
+.query-type label {
   height: 51px;
   border-radius: 8px;
   width: 100%;
@@ -52,7 +53,7 @@ fieldset label {
 fieldset {
   border: none;
 }
-fieldset label {
+.query-type label {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -141,4 +142,14 @@ textarea {
   font-weight: 700;
 }
 
-
+@media (min-width: 768px) {
+  .main-container {
+    margin-inline: 39px;
+    margin-block: 128px;
+    padding: 40px;
+  }
+  .name {
+    display: flex;
+    flex-direction: row;
+  }
+}
