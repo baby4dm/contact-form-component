@@ -233,6 +233,7 @@ textarea:focus,
     min-height: 773px;
   }
   textarea {
+    margin-bottom: 46px;
     height: 105px;
   }
   .succes-message {
