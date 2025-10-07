@@ -9,12 +9,10 @@ const radioOptions = Array.from(
 
 function getErrorElementForField(field) {
   if (!field) return null;
-
   if (field.name === "query")
     return form.querySelector(".query-type + .error-message");
   if (field.type === "checkbox")
     return field.closest("label")?.nextElementSibling ?? null;
-
   let sib = field.nextElementSibling;
   while (sib) {
     if (sib.classList?.contains("error-message")) return sib;
@@ -25,7 +23,6 @@ function getErrorElementForField(field) {
 
 function getSpacingElementForField(field) {
   if (!field) return null;
-
   if (field.name === "query") return radioOptions;
   if (field.type === "checkbox") return field.closest("label");
   return field;
@@ -38,10 +35,9 @@ function showErrorField(field) {
   if (!Array.isArray(spacingEls)) spacingEls = [spacingEls];
 
   spacingEls.forEach((el) => {
-    if (!el.dataset.origMargin) {
+    if (!el.dataset.origMargin)
       el.dataset.origMargin =
         window.getComputedStyle(el).marginBottom || "24px";
-    }
     el.style.marginBottom = "0px";
   });
 
@@ -51,6 +47,8 @@ function showErrorField(field) {
       err.style.marginBottom = spacingEls[0].dataset.origMargin;
   }
 
+  if (field.type !== "radio" && field.type !== "checkbox")
+    field.style.borderColor = "hsl(0, 66%, 54%)";
   field?.setAttribute("aria-invalid", "true");
 }
 
@@ -70,6 +68,8 @@ function hideErrorField(field) {
     err.style.marginBottom = "";
   }
 
+  if (field.type !== "radio" && field.type !== "checkbox")
+    field.style.borderColor = "";
   field?.removeAttribute("aria-invalid");
 }
 
@@ -85,6 +85,8 @@ function restoreAllSpacing() {
   allEls.forEach((el) => {
     el.style.marginBottom = "";
     delete el.dataset.origMargin;
+    if (el.type !== "radio" && el.type !== "checkbox")
+      el.style.borderColor = "";
   });
   errorMessages.forEach((m) => {
     m.classList.add("hidden");
